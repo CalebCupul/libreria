@@ -10,4 +10,7 @@ class Libro extends Model
     use HasFactory;
 
     protected $fillable = ['nombre', 'ISBN', 'editorial', 'imagen', 'descripcion', 'stock'];
+
+    
+
 }

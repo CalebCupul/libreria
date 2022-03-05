@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Libro;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 class LibroController extends Controller
 {
@@ -46,7 +48,24 @@ class LibroController extends Controller
             'stock' => 'required'
         ]);
 
-        $libro = Libro::create($request->all());
+        
+
+        $libro = $request->all();
+
+        if($request->file('imagen')){
+            
+            $nombreImagen = $request->file('imagen')->getClientOriginalName();
+            $path = public_path() . '/imagenes/' . $nombreImagen;
+
+        }
+
+        Image::make($request->file('imagen'))->resize(150,150)->save($path);
+
+        Libro::create($libro);
+
+        // if($request->hasFile('imagen') && $request->file('imagen')->isValid()){
+        //     $libro->addMediaFromRequest('imagen')->toMediaCollection('libro_imagen');
+        // }
 
         return redirect('libros')->with(['libro' => $libro]);
     }

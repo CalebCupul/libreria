@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -13,7 +14,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $usuarios = User::all();
+        return view('usuarios.index', compact('usuarios'));
     }
 
     /**
@@ -23,7 +25,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('usuarios.create');
     }
 
     /**
@@ -35,6 +37,22 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
+        request()->validate([
+            'name' => 'required',
+            'password' => 'required',
+            'email' => 'required',
+            'domicilio' => 'required',
+            'telefono' => 'required',
+            'rol' => 'required',
+            'imagen' => 'required',
+            'comprobante' => 'required',
+        ]);
+
+        $usuario = $request->all();
+        User::create($usuario);
+
+        return redirect('usuarios')->with(['usuario' => $usuario]);
+
     }
 
     /**
@@ -56,7 +74,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $usuario = User::findOrFail($id);
+        
+        return view('usuarios.edit', compact('usuario'));
     }
 
     /**
@@ -68,7 +88,20 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        request()->validate([
+            'name' => 'required',
+            'password' => 'required',
+            'email' => 'required',
+            'domicilio' => 'required',
+            'telefono' => 'required',
+            'rol' => 'required',
+            'imagen' => 'required',
+            'comprobante' => 'required',
+        ]);
+
+        User::whereId($id)->update($request->except('_method', '_token'));
+
+        return redirect('usuarios');
     }
 
     /**
@@ -79,6 +112,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::whereId($id)->delete();
+
+        return redirect('usuarios');
     }
 }

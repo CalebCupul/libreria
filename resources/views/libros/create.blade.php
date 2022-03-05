@@ -8,7 +8,7 @@
 
 @section('content')
     
-    {!! Form::open(array('route' => 'libros.store', 'method' => 'POST')) !!}
+    {!! Form::open(array('route' => 'libros.store', 'method' => 'POST', 'enctype' => "multipart/form-data" )) !!}
         <div class="row card p-4">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">

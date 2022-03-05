@@ -3,12 +3,12 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Libros</h1>
+    <h1>Usuarios</h1>
 @stop
 
 @section('content')
 
-<a href="/libros/create" role="button" class="btn btn-primary">Registrar libro</a>
+<a href="/usuarios/create" role="button" class="btn btn-primary">Registrar usuario</a>
 
     <div class="card p-3 mt-3">
         <table class="table table-striped mt-4" id="libros">
@@ -16,33 +16,36 @@
                 <tr>
                     <th>Imagen</th>
                     <th>Nombre</th>
-                    <th>ISBN</th>
-                    <th>Editorial</th>
-                    <th>Descripción</th>
-                    <th>Disponibilidad</th>
+                    <th>Domicilio</th>
+                    <th>Comprobante</th>
+                    <th>Teléfono</th>
+                    <th>Correo</th>
+                    <th>Rol</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
     
             <tbody class="text-center">
-                @foreach ($libros as $libro)
+                @foreach ($usuarios as $usuario)
                     <tr>
-                        {{-- {{ $libro->getMedia('libro_Imagen')->first() }} --}}
-                        <td class="align-middle"><img src="/imagenes/{{ $libro->imagen }}" alt=""></td>
-                        <td class="align-middle">{{ $libro->nombre }}</td>
-                        <td class="align-middle">{{ $libro->ISBN }}</td>
-                        <td class="align-middle">{{ $libro->editorial }}</td>
-                        <td class="align-middle">{{ $libro->descripcion }}</td>
-                        <td class="align-middle">{{ $libro->stock }}</td>
+                        {{-- <img src="/imagenes/{{ $usuario->imagen }}" alt=""> --}}
+                        <td class="align-middle">{{ $usuario->imagen }}</td>
+                        <td class="align-middle">{{ $usuario->name }}</td>
+                        <td class="align-middle">{{ $usuario->domicilio }}</td>
+                        <td class="align-middle">{{ $usuario->comprobante }}</td>
+                        <td class="align-middle">{{ $usuario->telefono }}</td>
+                        <td class="align-middle">{{ $usuario->email }}</td>
+                        <td class="align-middle">{{ $usuario->rol }}</td>
                         <td>
-                            <a href="{{ route('libros.edit', $libro->id) }}" role="button" class="btn btn-info">Editar</a>
-                            {!! Form::open(['method' => 'DELETE', 'route' => ['libros.destroy', $libro->id], 'style' => 'display:inline' ]) !!}
+                            <a href="{{ route('usuarios.edit', $usuario->id) }}" role="button" class="btn btn-info">Editar</a>
+                            {!! Form::open(['method' => 'DELETE', 'route' => ['usuarios.destroy', $usuario->id], 'style' => 'display:inline' ]) !!}
                                 {!! Form::submit('Borrar', ['class' => 'btn btn-danger']) !!}
                             {!! Form::close() !!}
     
                         </td>
                     </tr>
                 @endforeach
+                
             </tbody>
         </table>
     </div>
