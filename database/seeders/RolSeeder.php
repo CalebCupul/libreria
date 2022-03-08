@@ -42,54 +42,5 @@ class RolSeeder extends Seeder
         Permission::create(['name' => 'prestamos'])->syncRoles([$rolSuperAdministrador, $rolAdministrador, $rolEmpleado]);
         Permission::create(['name' => 'prestamos.create'])->syncRoles([$rolSuperAdministrador, $rolAdministrador, $rolEmpleado]);
 
-        $demoUser = User::factory()->create([
-            'name' => 'demoCliente',
-            'email' => 'demoCliente@gmail.com',
-            'domicilio' => 'Cucosta, Ixtapa',
-            'imagen' => 'demoImagen.jpg',
-            'comprobante' => 'demoComprobante.jpg',
-            'telefono' => '32215021322',
-            'rol' => 'Cliente'
-        ]);
-
-        $demoUser->assignRole($rolCliente);
-
-        $demoUser = User::factory()->create([
-            'name' => 'demoEmpleado',
-            'email' => 'demoEmpleado@gmail.com',
-            'domicilio' => 'Cucosta, Ixtapa',
-            'imagen' => 'demoImagen.jpg',
-            'comprobante' => 'demoComprobante.jpg',
-            'telefono' => '32215021322',
-            'rol' => 'Empleado'
-        ]);
-
-        $demoUser->assignRole($rolEmpleado);
-
-        $demoUser = User::factory()->create([
-            'name' => 'demoAdmin',
-            'email' => 'demoAdmin@gmail.com',
-            'domicilio' => 'Cucosta, Ixtapa',
-            'imagen' => 'demoImagen.jpg',
-            'comprobante' => 'demoComprobante.jpg',
-            'telefono' => '32215021322',
-            'rol' => 'Administrador'
-        ]);
-
-        $demoUser->assignRole($rolAdministrador);
-
-        $demoUser = User::factory()->create([
-            'name' => 'demoSuper',
-            'email' => 'demoSuper@gmail.com',
-            'domicilio' => 'Cucosta, Ixtapa',
-            'imagen' => 'demoImagen.jpg',
-            'comprobante' => 'demoComprobante.jpg',
-            'telefono' => '32215021322',
-            'rol' => 'Super Administrador'
-        ]);
-
-        $demoUser->assignRole($rolSuperAdministrador);
-
-
     }
 }

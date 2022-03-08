@@ -16,9 +16,6 @@
                 <tr>
                     <th>Imagen</th>
                     <th>Nombre</th>
-                    <th>Domicilio</th>
-                    <th>Comprobante</th>
-                    <th>Teléfono</th>
                     <th>Correo</th>
                     <th>Rol</th>
                     <th>Acciones</th>
@@ -31,12 +28,14 @@
                         {{-- <img src="/imagenes/{{ $usuario->imagen }}" alt=""> --}}
                         <td class="align-middle">{{ $usuario->imagen }}</td>
                         <td class="align-middle">{{ $usuario->name }}</td>
-                        <td class="align-middle">{{ $usuario->domicilio }}</td>
-                        <td class="align-middle">{{ $usuario->comprobante }}</td>
-                        <td class="align-middle">{{ $usuario->telefono }}</td>
                         <td class="align-middle">{{ $usuario->email }}</td>
-                        <td class="align-middle">{{ $usuario->rol }}</td>
+                        <td class="align-middle">
+                            @foreach($usuario->getRoleNames() as $rolName)
+                                <span class="badge badge-dark">{{ $rolName }}</span>
+                            @endforeach
+                        </td>
                         <td>
+                            <a href="{{ route('usuarios.show', $usuario->id) }}" role="button" class="btn btn-dark">Ver</a>
                             <a href="{{ route('usuarios.edit', $usuario->id) }}" role="button" class="btn btn-info">Editar</a>
                             {!! Form::open(['method' => 'DELETE', 'route' => ['usuarios.destroy', $usuario->id], 'style' => 'display:inline' ]) !!}
                                 {!! Form::submit('Borrar', ['class' => 'btn btn-danger']) !!}

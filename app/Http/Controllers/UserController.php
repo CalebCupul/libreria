@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -15,6 +16,7 @@ class UserController extends Controller
     public function index()
     {
         $usuarios = User::all();
+        
         return view('usuarios.index', compact('usuarios'));
     }
 
@@ -25,7 +27,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('usuarios.create');
+        $roles = Role::pluck('name', 'id');
+        return view('usuarios.create', compact('roles'));
     }
 
     /**
@@ -43,14 +46,17 @@ class UserController extends Controller
             'email' => 'required',
             'domicilio' => 'required',
             'telefono' => 'required',
-            'rol' => 'required',
+            'roles' => 'required',
             'imagen' => 'required',
             'comprobante' => 'required',
         ]);
+        
 
         $usuario = $request->all();
-        User::create($usuario);
 
+        $user = User::create($usuario);
+        $user->assignRole($request->roles);
+        
         return redirect('usuarios')->with(['usuario' => $usuario]);
 
     }
@@ -63,7 +69,10 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $usuario = User::findOrFail($id);
+        $roles = Role::pluck('name', 'id');
+        
+        return view('usuarios.show', compact('usuario', 'roles'));
     }
 
     /**
@@ -75,8 +84,9 @@ class UserController extends Controller
     public function edit($id)
     {
         $usuario = User::findOrFail($id);
+        $roles = Role::pluck('name', 'id');
         
-        return view('usuarios.edit', compact('usuario'));
+        return view('usuarios.edit', compact('usuario', 'roles'));
     }
 
     /**

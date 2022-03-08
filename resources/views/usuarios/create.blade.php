@@ -47,6 +47,15 @@
             </div>
 
             
+            
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        {!! Form::label('roles', 'Rol', ['class' => 'ml-1']) !!}
+                        {!! Form::select('roles', $roles, null, ['placeholder' => 'Selecciona un rol' , 'class' => 'form-control']) !!}
+                    </div>
+                </div>
+            
+
 
             {{-- <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
@@ -54,13 +63,6 @@
                     {!! Form::number('libros_activos', null, array('class' => 'form-control')) !!}
                 </div>
             </div> --}}
-
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    {!! Form::label('rol', 'Rol') !!}
-                    {!! Form::text('rol', null, array('class' => 'form-control')) !!}
-                </div>
-            </div>
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
