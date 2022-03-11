@@ -31,5 +31,5 @@ Auth::routes();
 Route::get('/dashboard', [DashboardController::class, 'index']);
 
 Route::resource('/libros', LibroController::class);
-Route::resource('/usuarios', UserController::class);
+Route::resource('/user', UserController::class);
 

@@ -240,7 +240,7 @@ return [
         ['header' => 'account_settings'],
         [
             'text' => 'Usuarios',
-            'url'  => 'usuarios',
+            'url'  => 'user',
             'icon' => 'fas fa-fw fa-user-cog',
         ],
         [

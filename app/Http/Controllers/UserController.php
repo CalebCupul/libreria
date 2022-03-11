@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -15,9 +19,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $usuarios = User::all();
+        $users = User::all();
         
-        return view('usuarios.index', compact('usuarios'));
+        return view('user.index', compact('users'));
     }
 
     /**
@@ -27,8 +31,10 @@ class UserController extends Controller
      */
     public function create()
     {
+
         $roles = Role::pluck('name', 'id');
-        return view('usuarios.create', compact('roles'));
+        return view('user.create', compact('roles'));
+
     }
 
     /**
@@ -39,26 +45,32 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        request()->validate([
-            'name' => 'required',
-            'password' => 'required',
-            'email' => 'required',
-            'domicilio' => 'required',
-            'telefono' => 'required',
-            'roles' => 'required',
-            'imagen' => 'required',
-            'comprobante' => 'required',
+
+        // Valida los campos de la petición
+        $input = $request->validate([
+            'name'          => 'required',
+            'password'      => 'required',
+            'email'         => 'required',
+            'domicilio'     => 'required',
+            'telefono'      => 'required',
+            'imagen'        => 'required|image',
+            'comprobante'   => 'required|mimes:pdf,jpeg',
+            'roles'         => 'required'
         ]);
-        
 
-        $usuario = $request->all();
+        // Guarda las imágenes en el disco público y retorna la ruta
+        // como nombre de imagen de los respectivos campos
+        $input['imagen'] = $request->file('imagen')->store('user-images');
+        $input['comprobante'] = $request->file('comprobante')->store('comprobantes');
 
-        $user = User::create($usuario);
+        // Encripta la contraseña y crea el usuario
+        $input['password'] = Hash::make($input['password']);
+        $user = User::create($input);
+
+        // Asignación de rol
         $user->assignRole($request->roles);
         
-        return redirect('usuarios')->with(['usuario' => $usuario]);
-
+        return redirect('user');
     }
 
     /**
@@ -67,12 +79,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        $usuario = User::findOrFail($id);
+        
         $roles = Role::pluck('name', 'id');
         
-        return view('usuarios.show', compact('usuario', 'roles'));
+        return view('user.show', compact('user', 'roles'));
     }
 
     /**
@@ -81,12 +93,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        $usuario = User::findOrFail($id);
         $roles = Role::pluck('name', 'id');
         
-        return view('usuarios.edit', compact('usuario', 'roles'));
+        return view('user.edit', compact('user', 'roles'));
     }
 
     /**
@@ -96,22 +107,63 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        request()->validate([
-            'name' => 'required',
-            'password' => 'required',
-            'email' => 'required',
-            'domicilio' => 'required',
-            'telefono' => 'required',
-            'rol' => 'required',
-            'imagen' => 'required',
-            'comprobante' => 'required',
+        // Valida los campos de la petición
+        $input = $request->validate([
+            'name'          => 'required',
+            'password'      => 'nullable',
+            'email'         => 'required',
+            'domicilio'     => 'required',
+            'telefono'      => 'required',
+            'imagen'        => 'nullable|image',
+            'comprobante'   => 'nullable|mimes:pdf,jpeg',
+            'roles'         => 'required'
         ]);
 
-        User::whereId($id)->update($request->except('_method', '_token'));
+        // Si la petición contiene un archivo
+        if( $request->hasFile('imagen')){
 
-        return redirect('usuarios');
+            // Borra la imagen anterior
+            Storage::delete($user->imagen);
+
+            // Actualiza la nueva imagen del usuario
+            $input['imagen'] = $request->file('imagen')->store('user-images');
+
+        } else {
+            
+            //Si no contiene un archivo, no incluye el campo
+            $input = Arr::except($input, array('imagen'));
+        }
+
+        if( $request->hasFile('comprobante')){
+            Storage::delete($user->comprobante);
+            $input['comprobante'] = $request->file('comprobante')->store('comprobantes');
+        } else {
+            $input = Arr::except($input, array('comprobante'));
+        }
+
+        // Si la petición contiene una contraseña
+        if( !empty($input['password'])){
+
+            // Guarda una nueva contraseña encriptada
+            $input['password'] = Hash::make($input['password']);
+
+        } else {
+
+            // Si no contiene una contraseña, no incluye el campo
+            $input = Arr::except($input, array('password'));
+        }
+
+        // Actualiza el usuario
+        $user->update($input);
+
+        // Encuentra el Usuario en la tabla de roles y lo elimina para posteriormente actualizarlo
+        DB::table('model_has_roles')->where('model_id', $user->id)->delete();
+        // Asignación de rol
+        $user->assignRole($request->roles);
+        
+        return redirect('user');
     }
 
     /**
@@ -120,10 +172,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        User::whereId($id)->delete();
 
-        return redirect('usuarios');
+        Storage::delete($user->imagen);
+        Storage::delete($user->comprobante);
+        $user->delete();
+
+        return redirect('user');
     }
 }

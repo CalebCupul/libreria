@@ -1,14 +1,4 @@
-@extends('adminlte::page')
-
-@section('title', 'Dashboard')
-
-@section('content_header')
-    <h1>Registrar nuevo usuario</h1>
-@stop
-
-@section('content')
-    
-    {!! Form::open(array('route' => 'usuarios.store', 'method' => 'POST')) !!}
+{!!Form::model($user, ['method' => 'PUT', 'route' => ['user.update',$user->id], 'enctype' => 'multipart/form-data']) !!}
         <div class="row card p-4">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
@@ -47,15 +37,6 @@
             </div>
 
             
-            
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        {!! Form::label('roles', 'Rol', ['class' => 'ml-1']) !!}
-                        {!! Form::select('roles', $roles, null, ['placeholder' => 'Selecciona un rol' , 'class' => 'form-control']) !!}
-                    </div>
-                </div>
-            
-
 
             {{-- <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
@@ -63,6 +44,13 @@
                     {!! Form::number('libros_activos', null, array('class' => 'form-control')) !!}
                 </div>
             </div> --}}
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    {!! Form::label('roles', 'Rol', ['class' => 'ml-1']) !!}
+                    {!! Form::select('roles', $roles, null, ['placeholder' => 'Selecciona un rol' , 'class' => 'form-control']) !!}
+                </div>
+            </div>
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
@@ -85,13 +73,3 @@
         </div>
 
     {!! Form::close() !!}
-
-@stop
-
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
-
-@section('js')
-    <script> console.log('Hi!'); </script>
-@stop

@@ -3,12 +3,12 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Editar usuario</h1>
+    <h1>Información de usuario</h1>
 @stop
 
 @section('content')
     
-    {!!Form::model($usuario, ['method' => 'PUT', 'route' => ['usuarios.update',$usuario->id]]) !!}
+    {!!Form::model($user, ['method' => 'GET', 'route' => ['user.show',$user->id]]) !!}
         <div class="row card p-4">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
@@ -74,10 +74,6 @@
                     {!! Form::label('comprobante', 'Comprobande de domicilio') !!}
                     {!! Form::file('comprobante', array('class' => 'form-control-file')) !!}
                 </div>
-            </div>
-
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <button type="submit" class="btn btn-primary">Guardar</button>
             </div>
 
         </div>

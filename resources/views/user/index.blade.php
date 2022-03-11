@@ -8,7 +8,7 @@
 
 @section('content')
 
-<a href="/usuarios/create" role="button" class="btn btn-primary">Registrar usuario</a>
+<a href="/user/create" role="button" class="btn btn-primary">Registrar usuario</a>
 
     <div class="card p-3 mt-3">
         <table class="table table-striped mt-4" id="libros">
@@ -23,21 +23,20 @@
             </thead>
     
             <tbody class="text-center">
-                @foreach ($usuarios as $usuario)
+                @foreach ($users as $user)
                     <tr>
-                        {{-- <img src="/imagenes/{{ $usuario->imagen }}" alt=""> --}}
-                        <td class="align-middle">{{ $usuario->imagen }}</td>
-                        <td class="align-middle">{{ $usuario->name }}</td>
-                        <td class="align-middle">{{ $usuario->email }}</td>
+                        <td class="algn-middle"><img class="img-fluid" src="/storage/{{ $user->imagen }}" alt="User image"></td>
+                        <td class="align-middle">{{ $user->name }}</td>
+                        <td class="align-middle">{{ $user->email }}</td>
                         <td class="align-middle">
-                            @foreach($usuario->getRoleNames() as $rolName)
+                            @foreach($user->getRoleNames() as $rolName)
                                 <span class="badge badge-dark">{{ $rolName }}</span>
                             @endforeach
                         </td>
-                        <td>
-                            <a href="{{ route('usuarios.show', $usuario->id) }}" role="button" class="btn btn-dark">Ver</a>
-                            <a href="{{ route('usuarios.edit', $usuario->id) }}" role="button" class="btn btn-info">Editar</a>
-                            {!! Form::open(['method' => 'DELETE', 'route' => ['usuarios.destroy', $usuario->id], 'style' => 'display:inline' ]) !!}
+                        <td class="align-middle">
+                            <a href="{{ route('user.show', $user->id) }}" role="button" class="btn btn-dark display:inline">Ver</a>
+                            <a href="{{ route('user.edit', $user->id) }}" role="button" class="btn btn-info display:inline">Editar</a>
+                            {!! Form::open(['method' => 'DELETE', 'route' => ['user.destroy', $user->id], 'style' => 'display:inline' ]) !!}
                                 {!! Form::submit('Borrar', ['class' => 'btn btn-danger']) !!}
                             {!! Form::close() !!}
     
