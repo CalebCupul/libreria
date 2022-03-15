@@ -11,6 +11,10 @@ class Libro extends Model
 
     protected $fillable = ['nombre', 'ISBN', 'editorial', 'imagen', 'descripcion', 'stock'];
 
+    public function prestamos(){
+        $this->belongsToMany(Prestamo::class);
+    }
+
     
 
 }

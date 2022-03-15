@@ -15,8 +15,18 @@ class CreatePrestamosTable extends Migration
     {
         Schema::create('prestamos', function (Blueprint $table) {
             $table->id();
-            //id usuario
-            //id libro
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('libro_id')->nullable();
+
+            $table->foreign('user_id')->references('id')
+                ->on('users')
+                ->onDelete('set null');
+
+            $table->foreign('libro_id')->references('id')
+                ->on('libros')
+                ->onDelete('set null');
+
+            $table->enum('status', ['entregado', 'pendiente', 'retrasado'])->default('pendiente');
             $table->string('cantidad');
             $table->timestamps();
         });

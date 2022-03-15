@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LibroController;
+use App\Http\Controllers\PrestamoController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -23,13 +24,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [DashboardController::class, 'index']
-// });
-
 Route::get('/dashboard', [DashboardController::class, 'index']);
 
 Route::resource('/libros', LibroController::class);
 Route::resource('/user', UserController::class);
+Route::resource('/prestamo', PrestamoController::class);
 
