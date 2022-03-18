@@ -28,7 +28,7 @@ class OptimizedUserImage
      */
     public function handle(UserSaved $event)
     {
-
+        
         // Redimensiona la imagen
         $image = Image::make(Storage::get($event->user->imagen))
             ->widen(600)

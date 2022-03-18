@@ -14,18 +14,28 @@ use Illuminate\Queue\SerializesModels;
 class UserSaved
 {
 
-    public $user;
+    
 
     use Dispatchable, InteractsWithSockets, SerializesModels;
+
+    /**
+     * 
+     * @var mixed
+     * 
+     */
+
+     public $user;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
+
+
     public function __construct(User $user)
     {
-        $this->$user = $user;        
+        $this->user = $user;        
     }
 
     /**

@@ -70,9 +70,7 @@ class UserController extends Controller
         $user = User::create($input);
 
         // Optimización de imagen
-        $this->OptimizedImage($user);
-        // ddd($user);
-        // UserSaved::dispatch($user);
+        UserSaved::dispatch($user);
 
         // Asignación de rol
         $user->assignRole($request->roles);
@@ -166,8 +164,7 @@ class UserController extends Controller
         $user->update($input);
 
         // Optimización de imagen
-        $this->OptimizedImage($user);
-        // UserSaved::dispatch($user);
+        UserSaved::dispatch($user);
 
         // Encuentra el Usuario en la tabla de roles y lo elimina para posteriormente actualizarlo
         DB::table('model_has_roles')->where('model_id', $user->id)->delete();
@@ -193,14 +190,4 @@ class UserController extends Controller
         return redirect('user');
     }
 
-    public function OptimizedImage(User $user){
-
-        // Redimensiona la imagen
-        $image = Image::make(Storage::get($user->imagen))
-            ->widen(600)
-            ->limitColors(255)
-            ->encode();
-        
-        Storage::put($user->imagen, (string) $image);
-    }
 }
