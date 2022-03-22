@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class PrestamoFactory extends Factory
+class BookRecordFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -14,7 +14,9 @@ class PrestamoFactory extends Factory
     public function definition()
     {
         return [
-            //
+            
+        
+
         ];
     }
 }

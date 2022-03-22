@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class LibroFactory extends Factory
+class BookFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -14,12 +14,14 @@ class LibroFactory extends Factory
     public function definition()
     {
         return [
-            'nombre' => $this->faker->sentence(),
-            'ISBN' => $this->faker->isbn10(),
+            
+            'name' => $this->faker->sentence(),
+            'isbn' => $this->faker->isbn10(),
             'editorial' => $this->faker->company(),
-            'imagen' => $this->faker->word(),
-            'descripcion' => $this->faker->sentence(),
+            'image' => $this->faker->word(),
+            'description' => $this->faker->sentence(),
             'stock' => '10'
+            
         ];
     }
 }

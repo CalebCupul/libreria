@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePrestamosTable extends Migration
+class CreateBookRecordsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,21 @@ class CreatePrestamosTable extends Migration
      */
     public function up()
     {
-        Schema::create('prestamos', function (Blueprint $table) {
+        Schema::create('book_records', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->unsignedBigInteger('libro_id')->nullable();
+            $table->unsignedBigInteger('book_id')->nullable();
 
             $table->foreign('user_id')->references('id')
                 ->on('users')
                 ->onDelete('set null');
 
-            $table->foreign('libro_id')->references('id')
-                ->on('libros')
+            $table->foreign('book_id')->references('id')
+                ->on('books')
                 ->onDelete('set null');
 
             $table->enum('status', ['entregado', 'pendiente', 'retrasado'])->default('pendiente');
-            $table->string('cantidad');
+            $table->string('ammount');
             $table->timestamps();
         });
     }
@@ -39,6 +39,6 @@ class CreatePrestamosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('prestamos');
+        Schema::dropIfExists('book_records');
     }
 }

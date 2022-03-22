@@ -8,38 +8,35 @@
 
 @section('content')
 
-<a href="/libros/create" role="button" class="btn btn-primary">Registrar libro</a>
+<a href="/book/create" role="button" class="btn btn-primary">Registrar libro</a>
 
     <div class="card p-3 mt-3">
         <table class="table table-striped mt-4" id="libros">
             <thead class="text-center">
                 <tr>
-                    <th>Imagen</th>
+                    <th>Portada</th>
                     <th>Nombre</th>
                     <th>ISBN</th>
                     <th>Editorial</th>
-                    <th>Descripción</th>
                     <th>Disponibilidad</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
     
             <tbody class="text-center">
-                @foreach ($libros as $libro)
+                @foreach ($books as $book)
                     <tr>
-                        {{-- {{ $libro->getMedia('libro_Imagen')->first() }} --}}
-                        <td class="align-middle"><img src="/imagenes/{{ $libro->imagen }}" alt=""></td>
-                        <td class="align-middle">{{ $libro->nombre }}</td>
-                        <td class="align-middle">{{ $libro->ISBN }}</td>
-                        <td class="align-middle">{{ $libro->editorial }}</td>
-                        <td class="align-middle">{{ $libro->descripcion }}</td>
-                        <td class="align-middle">{{ $libro->stock }}</td>
-                        <td>
-                            <a href="{{ route('libros.edit', $libro->id) }}" role="button" class="btn btn-info">Editar</a>
-                            {!! Form::open(['method' => 'DELETE', 'route' => ['libros.destroy', $libro->id], 'style' => 'display:inline' ]) !!}
+                        <td class="align-middle"><img class="img-fluid" style="height: 125px; width: 100px; object-fit: cover" src="/storage/{{ $book->image }}" alt="{{ $book->name }}"></td>
+                        <td class="align-middle">{{ $book->name }}</td>
+                        <td class="align-middle">{{ $book->isbn }}</td>
+                        <td class="align-middle">{{ $book->editorial }}</td>
+                        <td class="align-middle">{{ $book->stock }}</td>
+                        <td class="align-middle">
+                            <a href="{{ route('book.show', $book->id) }}" role="button" class="btn btn-dark display:inline">Ver</a>
+                            <a href="{{ route('book.edit', $book->id) }}" role="button" class="btn btn-info display:inline">Editar</a>
+                            {!! Form::open(['method' => 'DELETE', 'route' => ['book.destroy', $book->id], 'style' => 'display:inline' ]) !!}
                                 {!! Form::submit('Borrar', ['class' => 'btn btn-danger']) !!}
                             {!! Form::close() !!}
-    
                         </td>
                     </tr>
                 @endforeach

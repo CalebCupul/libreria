@@ -1,8 +1,7 @@
 <?php
 
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\LibroController;
-use App\Http\Controllers\PrestamoController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -26,7 +25,7 @@ Auth::routes();
 
 Route::get('/dashboard', [DashboardController::class, 'index']);
 
-Route::resource('/libros', LibroController::class);
+Route::resource('/book', BookController::class);
 Route::resource('/user', UserController::class);
-Route::resource('/prestamo', PrestamoController::class);
+// Route::resource('/prestamo', PrestamoController::class);
 

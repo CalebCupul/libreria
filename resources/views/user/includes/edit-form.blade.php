@@ -23,27 +23,18 @@
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    {!! Form::label('domicilio', 'Domicilio') !!}
-                    {!! Form::text('domicilio', null, array('class' => 'form-control')) !!}
-
+                    {!! Form::label('phone_number', 'Teléfono') !!}
+                    {!! Form::number('phone_number', null, array('class' => 'form-control')) !!}
                 </div>
             </div>
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    {!! Form::label('telefono', 'Teléfono') !!}
-                    {!! Form::number('telefono', null, array('class' => 'form-control')) !!}
+                    {!! Form::label('address', 'Domicilio') !!}
+                    {!! Form::text('address', null, array('class' => 'form-control')) !!}
+
                 </div>
             </div>
-
-            
-
-            {{-- <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    {!! Form::label('libros_activos', 'Libros A') !!}
-                    {!! Form::number('libros_activos', null, array('class' => 'form-control')) !!}
-                </div>
-            </div> --}}
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
@@ -54,15 +45,15 @@
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    {!! Form::label('imagen', 'Fotografía') !!}
-                    {!! Form::file('imagen', array('class' => 'form-control-file')) !!}
+                    {!! Form::label('image', 'Fotografía') !!}
+                    {!! Form::file('image', array('class' => 'form-control-file')) !!}
                 </div>
             </div>
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    {!! Form::label('comprobante', 'Comprobande de domicilio') !!}
-                    {!! Form::file('comprobante', array('class' => 'form-control-file')) !!}
+                    {!! Form::label('proof_of_address', 'Comprobante de domicilio') !!}
+                    {!! Form::file('proof_of_address', array('class' => 'form-control-file')) !!}
                 </div>
             </div>
 

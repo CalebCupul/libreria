@@ -50,20 +50,20 @@ class UserController extends Controller
 
         // Valida los campos de la petición
         $input = $request->validate([
-            'name'          => 'required',
-            'password'      => 'required',
-            'email'         => 'required',
-            'domicilio'     => 'required',
-            'telefono'      => 'required',
-            'imagen'        => 'required|image',
-            'comprobante'   => 'required|mimes:pdf,jpeg',
-            'roles'         => 'required'
+            'name'              => 'required',
+            'password'          => 'required',
+            'email'             => 'required',
+            'phone_number'      => 'required',
+            'address'           => 'required',
+            'proof_of_address'  => 'required|mimes:pdf,jpeg',
+            'image'             => 'required|image',
+            'roles'             => 'required'
         ]);
         
         // Guarda las imágenes en el disco público y retorna la ruta
         // como nombre de imagen de los respectivos campos
-        $input['imagen'] = $request->file('imagen')->store('user-images');
-        $input['comprobante'] = $request->file('comprobante')->store('comprobantes');
+        $input['image'] = $request->file('image')->store('UserImages');
+        $input['proof_of_address'] = $request->file('proof_of_address')->store('ProofsOfAddress');
 
         // Encripta la contraseña y crea el usuario
         $input['password'] = Hash::make($input['password']);
@@ -114,38 +114,39 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+       
         // Valida los campos de la petición
         $input = $request->validate([
-            'name'          => 'required',
-            'password'      => 'nullable',
-            'email'         => 'required',
-            'domicilio'     => 'required',
-            'telefono'      => 'required',
-            'imagen'        => 'nullable|image',
-            'comprobante'   => 'nullable|mimes:pdf,jpeg',
-            'roles'         => 'required'
+            'name'              => 'required',
+            'email'             => 'required',
+            'password'          => 'nullable',
+            'phone_number'      => 'required',
+            'address'           => 'required',
+            'proof_of_address'  => 'nullable|mimes:pdf,jpeg',
+            'image'             => 'nullable|image',
+            'roles'             => 'required'
         ]);
-
+        
+        
         // Si la petición contiene un archivo
-        if( $request->hasFile('imagen')){
-
+        if( $request->hasFile('image')){
             // Borra la imagen anterior
-            Storage::delete($user->imagen);
+            Storage::delete($user->image);
 
             // Actualiza la nueva imagen del usuario
-            $input['imagen'] = $request->file('imagen')->store('user-images');
+            $input['image'] = $request->file('image')->store('UserImages');
 
         } else {
             
             //Si no contiene un archivo, no incluye el campo
-            $input = Arr::except($input, array('imagen'));
+            $input = Arr::except($input, array('image'));
         }
 
-        if( $request->hasFile('comprobante')){
-            Storage::delete($user->comprobante);
-            $input['comprobante'] = $request->file('comprobante')->store('comprobantes');
+        if( $request->hasFile('proof_of_address')){
+            Storage::delete($user->proof_of_address);
+            $input['proof_of_address'] = $request->file('proof_of_address')->store('ProofsOfAddress');
         } else {
-            $input = Arr::except($input, array('comprobante'));
+            $input = Arr::except($input, array('proof_of_address'));
         }
 
         // Si la petición contiene una contraseña
@@ -183,8 +184,8 @@ class UserController extends Controller
     public function destroy(User $user)
     {
 
-        Storage::delete($user->imagen);
-        Storage::delete($user->comprobante);
+        Storage::delete($user->image);
+        Storage::delete($user->proof_of_address);
         $user->delete();
 
         return redirect('user');

@@ -245,7 +245,7 @@ return [
         ],
         [
             'text' => 'Libros',
-            'url'  => 'libros',
+            'url'  => 'book',
             'icon' => 'fas fa-fw fa-book',
         ],
         [

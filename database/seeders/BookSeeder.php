@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Book;
 use Illuminate\Database\Seeder;
 
-class PrestamoSeeder extends Seeder
+class BookSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +14,6 @@ class PrestamoSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Book::factory()->count(5)->create();
     }
 }

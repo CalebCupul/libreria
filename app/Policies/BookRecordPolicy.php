@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Prestamo;
+use App\Models\BookRecord;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class PrestamoPolicy
+class BookRecordPolicy
 {
     use HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class PrestamoPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Prestamo  $prestamo
+     * @param  \App\Models\BookRecord  $bookRecord
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Prestamo $prestamo)
+    public function view(User $user, BookRecord $bookRecord)
     {
         //
     }
@@ -48,10 +48,10 @@ class PrestamoPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Prestamo  $prestamo
+     * @param  \App\Models\BookRecord  $bookRecord
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Prestamo $prestamo)
+    public function update(User $user, BookRecord $bookRecord)
     {
         //
     }
@@ -60,10 +60,10 @@ class PrestamoPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Prestamo  $prestamo
+     * @param  \App\Models\BookRecord  $bookRecord
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Prestamo $prestamo)
+    public function delete(User $user, BookRecord $bookRecord)
     {
         //
     }
@@ -72,10 +72,10 @@ class PrestamoPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Prestamo  $prestamo
+     * @param  \App\Models\BookRecord  $bookRecord
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Prestamo $prestamo)
+    public function restore(User $user, BookRecord $bookRecord)
     {
         //
     }
@@ -84,10 +84,10 @@ class PrestamoPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Prestamo  $prestamo
+     * @param  \App\Models\BookRecord  $bookRecord
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Prestamo $prestamo)
+    public function forceDelete(User $user, BookRecord $bookRecord)
     {
         //
     }

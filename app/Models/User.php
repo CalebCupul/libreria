@@ -20,14 +20,15 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+
         'name',
         'email',
         'password',
-        'domicilio',
-        'telefono',
-        'rol',
-        'imagen',
-        'comprobante'
+        'phone_number',
+        'address',
+        'proof_of_address',
+        'image',
+        
     ];
 
     /**
@@ -49,8 +50,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function prestamos(){
-        return $this->hasMany(Prestamo::class);
+    public function bookRecords(){
+        return $this->hasMany(BookRecord::class);
     }
 
 

@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Libro;
-use Database\Factories\LibroFactory;
+use App\Models\Book;
 use Illuminate\Database\Seeder;
 
-class LibroSeeder extends Seeder
+class BookRecordSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +14,6 @@ class LibroSeeder extends Seeder
      */
     public function run()
     {
-        Libro::factory()->count(5)->create();
+        
     }
 }

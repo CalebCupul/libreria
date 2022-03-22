@@ -14,7 +14,7 @@
         <table class="table table-striped mt-4" id="libros">
             <thead class="text-center">
                 <tr>
-                    <th>Imagen</th>
+                    <th>Fotografía</th>
                     <th>Nombre</th>
                     <th>Correo</th>
                     <th>Rol</th>
@@ -25,7 +25,7 @@
             <tbody class="text-center">
                 @foreach ($users as $user)
                     <tr>
-                        <td class="algn-middle"><img class="img-fluid" style="height: 125px; width: 100px; object-fit: cover" src="/storage/{{ $user->imagen }}" alt="User image"></td>
+                        <td class="align-middle"><img class="img-fluid" style="height: 125px; width: 100px; object-fit: cover" src="/storage/{{ $user->image }}" alt="User image"></td>
                         <td class="align-middle">{{ $user->name }}</td>
                         <td class="align-middle">{{ $user->email }}</td>
                         <td class="align-middle">

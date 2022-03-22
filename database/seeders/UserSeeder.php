@@ -15,43 +15,51 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::create([
+
             'name' => 'Caleb',
             'email' => 'calebcupul@gmail.com',
             'password' => bcrypt('caleb123'),
-            'domicilio' => 'Cucosta, Ixtapa',
-            'imagen' => 'demoImagen.jpg',
-            'comprobante' => 'demoComprobante.jpg',
-            'telefono' => '32215021322'
+            'phone_number' => '32215021322',
+            'address' => 'Cucosta, Ixtapa',
+            'proof_of_address' => 'demoComprobante.jpg',
+            'image' => 'demoImagen.jpg'
+            
         ])->assignRole('Super Administrador');
 
         User::create([
+
             'name' => 'demoCliente',
             'email' => 'demoCliente@gmail.com',
             'password' => bcrypt('caleb123'),
-            'domicilio' => 'Cucosta, Ixtapa',
-            'imagen' => 'demoImagen.jpg',
-            'comprobante' => 'demoComprobante.jpg',
-            'telefono' => '32215021322'
+            'phone_number' => '32215021322',
+            'address' => 'Cucosta, Ixtapa',
+            'proof_of_address' => 'demoComprobante.jpg',
+            'image' => 'demoImagen.jpg'
+            
         ])->assignRole('Cliente');
 
         User::create([
+
             'name' => 'demoEmpleado',
             'email' => 'demoEmpleado@gmail.com',
             'password' => bcrypt('caleb123'),
-            'domicilio' => 'Cucosta, Ixtapa',
-            'imagen' => 'demoImagen.jpg',
-            'comprobante' => 'demoComprobante.jpg',
-            'telefono' => '32215021322'
+            'phone_number' => '32215021322',
+            'address' => 'Cucosta, Ixtapa',
+            'proof_of_address' => 'demoComprobante.jpg',
+            'image' => 'demoImagen.jpg'
+            
         ])->assignRole('Empleado');
 
         User::create([
+
             'name' => 'DemoAdmin',
             'email' => 'demoAdmin@gmail.com',
             'password' => bcrypt('caleb123'),
-            'domicilio' => 'Cucosta, Ixtapa',
-            'imagen' => 'demoImagen.jpg',
-            'comprobante' => 'demoComprobante.jpg',
-            'telefono' => '32215021322'
+            'phone_number' => '32215021322',
+            'address' => 'Cucosta, Ixtapa',
+            'proof_of_address' => 'demoComprobante.jpg',
+            'image' => 'demoImagen.jpg',
+            
         ])->assignRole('Administrador');
     }
 }

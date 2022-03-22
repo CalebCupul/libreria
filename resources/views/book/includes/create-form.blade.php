@@ -1,26 +1,16 @@
-@extends('adminlte::page')
-
-@section('title', 'Dashboard')
-
-@section('content_header')
-    <h1>Editar libro</h1>
-@stop
-
-@section('content')
-    
-    {!! Form::model($libro, ['method' => 'PUT', 'route' => ['libros.update',$libro->id]]) !!}
+{!! Form::open(array('route' => 'book.store', 'method' => 'POST', 'enctype' => "multipart/form-data" )) !!}
         <div class="row card p-4">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    {!! Form::label('nombre', 'Nombre') !!}
-                    {!! Form::text('nombre', null, array('class' => 'form-control')) !!}
+                    {!! Form::label('name', 'Nombre') !!}
+                    {!! Form::text('name', null, array('class' => 'form-control')) !!}
                 </div>
             </div>
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    {!! Form::label('ISBN', 'ISBN') !!}
-                    {!! Form::text('ISBN', null, array('class' => 'form-control')) !!}
+                    {!! Form::label('isbn', 'ISBN') !!}
+                    {!! Form::text('isbn', null, array('class' => 'form-control')) !!}
 
                 </div>
             </div>
@@ -35,16 +25,8 @@
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    {!! Form::label('imagen', 'Imagen') !!}
-                    {!! Form::file('imagen', array('class' => 'form-control-file')) !!}
-                </div>
-            </div>
-
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    {!! Form::label('descripcion', 'Descripción') !!}
-                    {!! Form::text('descripcion', null, array('class' => 'form-control')) !!}
-
+                    {!! Form::label('description', 'Descripción') !!}
+                    {!! Form::text('description', null, array('class' => 'form-control')) !!}
                 </div>
             </div>
 
@@ -56,19 +38,16 @@
             </div>
 
             <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    {!! Form::label('image', 'Imagen') !!}
+                    {!! Form::file('image', array('class' => 'form-control-file')) !!}
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
                 <button type="submit" class="btn btn-primary">Guardar</button>
             </div>
 
         </div>
 
     {!! Form::close() !!}
-
-@stop
-
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
-
-@section('js')
-    <script> console.log('Hi!'); </script>
-@stop

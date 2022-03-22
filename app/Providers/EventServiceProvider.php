@@ -20,6 +20,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         \App\Events\UserSaved::class => [
             \App\Listeners\OptimizedUserImage::class
+        ],
+        \App\Events\BookSaved::class => [
+            \App\Listeners\OptimizedBookImage::class
         ]
     ];
 
