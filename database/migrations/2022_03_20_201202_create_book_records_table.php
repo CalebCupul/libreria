@@ -26,8 +26,7 @@ class CreateBookRecordsTable extends Migration
                 ->on('books')
                 ->onDelete('set null');
 
-            $table->enum('status', ['entregado', 'pendiente', 'retrasado'])->default('pendiente');
-            $table->string('ammount');
+            $table->enum('status', ['Entregado', 'Pendiente', 'Retrasado'])->default('Pendiente');
             $table->timestamps();
         });
     }

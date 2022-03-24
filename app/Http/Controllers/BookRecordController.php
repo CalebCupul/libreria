@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use App\Models\BookRecord;
-use App\Http\Requests\StoreBookRecordRequest;
-use App\Http\Requests\UpdateBookRecordRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class BookRecordController extends Controller
@@ -16,7 +16,8 @@ class BookRecordController extends Controller
      */
     public function index()
     {
-        //
+        $book_records = BookRecord::with('user')->with('book')->get();
+        return view('book-record.index', compact('book_records'));
     }
 
     /**
@@ -26,7 +27,9 @@ class BookRecordController extends Controller
      */
     public function create()
     {
-        //
+        $books = Book::pluck('name', 'id');
+        $users = User::pluck('name', 'id');
+        return view('book-record.create', compact('books', 'users'));
     }
 
     /**
@@ -37,7 +40,16 @@ class BookRecordController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->validate([
+
+            'user_id' => 'required',
+            'book_id' => 'required'
+
+        ]);
+        
+        BookRecord::create($input);
+
+        return redirect('book-record');
     }
 
     /**
@@ -48,7 +60,7 @@ class BookRecordController extends Controller
      */
     public function show(BookRecord $bookRecord)
     {
-        //
+        return 'Show method';
     }
 
     /**
@@ -59,7 +71,7 @@ class BookRecordController extends Controller
      */
     public function edit(BookRecord $bookRecord)
     {
-        //
+        return view('book-record.edit');
     }
 
     /**

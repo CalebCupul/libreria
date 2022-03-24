@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\BookRecordController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
+use App\Models\BookRecord;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -27,5 +29,4 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 
 Route::resource('/book', BookController::class);
 Route::resource('/user', UserController::class);
-// Route::resource('/prestamo', PrestamoController::class);
-
+Route::resource('/book-record', BookRecordController::class);

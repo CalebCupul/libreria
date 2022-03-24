@@ -250,7 +250,7 @@ return [
         ],
         [
             'text' => 'Préstamos',
-            'url'  => 'admin/settings',
+            'url'  => 'book-record',
             'icon' => 'fas fa-fw fa-people-carry',
         ],
         // [

@@ -11,8 +11,8 @@ class BookRecord extends Model
 
     protected $fillable = [
 
-        'status', 
-        'ammount'
+        'user_id', 
+        'book_id'
         
     ];
 
@@ -20,7 +20,7 @@ class BookRecord extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function books(){
-        return $this->hasMany(Book::class);
+    public function book(){
+        return $this->belongsTo(Book::class);
     }
 }
