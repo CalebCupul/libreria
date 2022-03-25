@@ -12,7 +12,8 @@ class BookRecord extends Model
     protected $fillable = [
 
         'user_id', 
-        'book_id'
+        'book_id',
+        'status'
         
     ];
 

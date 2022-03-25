@@ -60,7 +60,7 @@ class BookRecordController extends Controller
      */
     public function show(BookRecord $bookRecord)
     {
-        return 'Show method';
+        return view('book-record.show', compact('bookRecord'));
     }
 
     /**
@@ -71,7 +71,7 @@ class BookRecordController extends Controller
      */
     public function edit(BookRecord $bookRecord)
     {
-        return view('book-record.edit');
+        
     }
 
     /**
@@ -83,7 +83,10 @@ class BookRecordController extends Controller
      */
     public function update(Request $request, BookRecord $bookRecord)
     {
-        //
+        // Al devolver el libro, cambia el estado del prestamo
+        $bookRecord->update(['status' => 'Entregado']);
+
+        return redirect('book-record');
     }
 
     /**
@@ -94,6 +97,6 @@ class BookRecordController extends Controller
      */
     public function destroy(BookRecord $bookRecord)
     {
-        //
+
     }
 }

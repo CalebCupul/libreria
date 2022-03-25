@@ -27,13 +27,24 @@
                         
                         <td class="align-middle">{{ $book_record->user->name }}</td>
                         <td class="align-middle">{{ $book_record->book->name }}</td>
-                        <td class="align-middle">{{ $book_record->status }}</td>
+                        <td class="align-middle">
+                            @if($book_record->status == 'Pendiente')
+                                <span class="badge badge-secondary p-2">{{ $book_record->status }}
+                            @elseif($book_record->status == 'Entregado')
+                                <span class="badge badge-success p-2">{{ $book_record->status }}
+                            @else
+                                <span class="badge badge-danger p-2">{{ $book_record->status }}
+                            @endif
+                            
+
+                            </span></td>
                         <td class="align-middle" >
                             <a href="{{ route('book-record.show', $book_record->id) }}" role="button" class="btn btn-dark display:inline">Ver</a>
-                            <a href="{{ route('book-record.edit', $book_record->id) }}" role="button" class="btn btn-info display:inline">Editar</a>
-                            {!! Form::open(['method' => 'DELETE', 'route' => ['book-record.destroy', $book_record->id], 'style' => 'display:inline' ]) !!}
-                                {!! Form::submit('Borrar', ['class' => 'btn btn-danger']) !!}
+                            @if($book_record->status != 'Entregado')
+                            {!! Form::open(['method' => 'PUT', 'route' => ['book-record.update', $book_record->id], 'style' => 'display:inline' ]) !!}
+                                {!! Form::submit('Devolver', ['class' => 'btn btn-info ']) !!}
                             {!! Form::close() !!}
+                            @endif
     
                         </td>
                     </tr>
