@@ -25,7 +25,7 @@
             <tbody class="text-center">
                 @foreach ($users as $user)
                     <tr>
-                        <td class="align-middle"><img class="img-fluid" style="height: 125px; width: 100px; object-fit: cover" src="/storage/{{ $user->image }}" alt="User image"></td>
+                    <td class="align-middle"><img class="img-fluid" style="height: 125px; width: 100px; object-fit: cover" src="/storage/{{ $user->image }}" alt="{{ $user->name }}"></td>
                         <td class="align-middle">{{ $user->name }}</td>
                         <td class="align-middle">{{ $user->email }}</td>
                         <td class="align-middle">

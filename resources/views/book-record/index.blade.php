@@ -16,6 +16,10 @@
                 <tr>
                     <th>Usuario</th>
                     <th>Libro</th>
+                    <th>ISBN</th>
+                    <th>Editorial</th>
+                    <th>Préstamo</th>
+                    <th>Entrega</th>
                     <th>Estatus</th>
                     <th>Acciones</th>
                 </tr>
@@ -27,17 +31,18 @@
                         
                         <td class="align-middle">{{ $book_record->user->name }}</td>
                         <td class="align-middle">{{ $book_record->book->name }}</td>
+                        <td class="align-middle">{{ $book_record->book->isbn }}</td>
+                        <td class="align-middle">{{ $book_record->book->editorial }}</td>
+                        <td class="align-middle">{{ $book_record->created_at->format('Y-m-d') }}</td>
+                        <td class="align-middle">{{ $book_record->created_at->addDays(5)->format('Y-m-d') }}</td>
                         <td class="align-middle">
                             @if($book_record->status == 'Pendiente')
-                                <span class="badge badge-secondary p-2">{{ $book_record->status }}
+                                <span class="badge badge-secondary p-2">{{ $book_record->status }}</span></td>
                             @elseif($book_record->status == 'Entregado')
-                                <span class="badge badge-success p-2">{{ $book_record->status }}
+                                <span class="badge badge-success p-2">{{ $book_record->status }}</span></td>
                             @else
-                                <span class="badge badge-danger p-2">{{ $book_record->status }}
+                                <span class="badge badge-danger p-2">{{ $book_record->status }}</span></td>
                             @endif
-                            
-
-                            </span></td>
                         <td class="align-middle" >
                             <a href="{{ route('book-record.show', $book_record->id) }}" role="button" class="btn btn-dark display:inline">Ver</a>
                             @if($book_record->status != 'Entregado')
