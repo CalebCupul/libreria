@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\UserSaved;
+use App\Exports\UsersExport;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Role;
 use Intervention\Image\Facades\Image;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -189,6 +191,11 @@ class UserController extends Controller
         $user->delete();
 
         return redirect('user');
+    }
+
+    public function export()
+    {
+        return Excel::download(new UsersExport, 'users.xlsx');
     }
 
 }

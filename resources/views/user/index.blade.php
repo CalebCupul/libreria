@@ -9,6 +9,8 @@
 @section('content')
 
 <a href="/user/create" role="button" class="btn btn-primary">Registrar usuario</a>
+<a href="{{ route('user.export') }}" role="button" class="btn btn-success"><i class="fas fa-download"></i> Excel</a>
+
 
     <div class="card p-3 mt-3">
         <table class="table table-striped mt-4" id="libros">

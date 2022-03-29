@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\BookRecordsExport;
 use App\Models\Book;
 use App\Models\BookRecord;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BookRecordController extends Controller
 {
@@ -97,6 +99,12 @@ class BookRecordController extends Controller
      */
     public function destroy(BookRecord $bookRecord)
     {
+
+    }
+
+    public function export(){
+        
+        return Excel::download(new BookRecordsExport, 'prestamos.xlsx');
 
     }
 }

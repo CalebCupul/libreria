@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Events\BookSaved;
+use App\Exports\BooksExport;
+use App\Imports\BooksImport;
 use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BookController extends Controller
 {
@@ -45,14 +48,22 @@ class BookController extends Controller
             'isbn'              => 'required',
             'editorial'         => 'required',
             'description'       => 'required',
-            'image'             => 'required|image',
+            'image'             => 'nullable|image',
             'stock'             => 'required'
         ]);
 
-        $input['image'] = $request->file('image')->store('BookImages');
+        if($request->hasFile('image')){
+            $input['image'] = $request->file('image')->store('BookImages');
+            
+        }
+
         $book = Book::create($input);
 
-        BookSaved::dispatch($book);
+        if($request->hasFile('image')){
+            BookSaved::dispatch($book);
+        }
+
+        
 
         return redirect('book');
     }
@@ -123,5 +134,21 @@ class BookController extends Controller
         $book->delete();
 
         return redirect('book');
+    }
+
+    public function export(){
+        return Excel::download(new BooksExport, 'books.xlsx');
+
+    }
+
+    public function import(Request $request){
+        $input = $request->validate([
+            'import_file' => 'required|mimes:csv,xlsx,xls'
+        ]);
+
+
+        Excel::import(new BooksImport, request()->file('import_file'));
+
+        return redirect('book')->with('success', 'Productos importados exitosamente');
     }
 }

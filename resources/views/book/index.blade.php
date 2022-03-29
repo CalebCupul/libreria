@@ -9,6 +9,38 @@
 @section('content')
 
 <a href="/book/create" role="button" class="btn btn-primary">Registrar libro</a>
+<a href="{{ route('book.export') }}" role="button" class="btn btn-success"><i class="fas fa-download"></i> Excel</a>
+<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#importModal"><i class="fas fa-file-excel"></i> Importar</button>
+
+<div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="importModalLabel">Importar libros desde Excel</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {!! Form::open(array('route' => 'book.import', 'method' => 'POST', 'enctype' => "multipart/form-data", 'style' => 'display:inline')) !!}
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    {!! Form::label('import_file', 'Documento') !!}
+                    {!! Form::file('import_file', array('class' => 'form-control-file')) !!}
+                </div>
+                
+            </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            {!! Form::submit('Importar', ['class' => 'btn btn-primary']) !!}
+            {!! Form::close() !!}
+      </div>
+
+    </div>
+  </div>
+</div>
 
     <div class="card p-3 mt-3">
         <table class="table table-striped mt-4" id="libros">
