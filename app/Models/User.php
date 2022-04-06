@@ -28,6 +28,7 @@ class User extends Authenticatable
         'address',
         'proof_of_address',
         'image',
+        'status'
         
     ];
 

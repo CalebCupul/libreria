@@ -22,6 +22,8 @@ class CreateUsersTable extends Migration
             $table->string('image');
             $table->string('proof_of_address');
             $table->string('address');
+            $table->enum('status', ['Activo', 'Inactivo', 'Suspendido'])->default('Activo');
+
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

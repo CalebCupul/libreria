@@ -198,4 +198,12 @@ class UserController extends Controller
         return Excel::download(new UsersExport, 'users.xlsx');
     }
 
+    public function suspendUser(User $user){
+
+        // Dar de baja a un usuario
+        $user->update(['status' => 'Inactivo']);
+
+        return redirect('user');
+    }
+
 }

@@ -168,6 +168,9 @@ return [
         // Excel
         Maatwebsite\Excel\ExcelServiceProvider::class,
 
+        // SweetAlerts
+        RealRashid\SweetAlert\SweetAlertServiceProvider::class,
+
         /*
          * Package Service Providers...
          */
@@ -238,6 +241,9 @@ return [
 
         // Excel
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+
+        // SweetAlerts
+        'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
 
     ],
 

@@ -20,6 +20,7 @@
                     <th>Nombre</th>
                     <th>Correo</th>
                     <th>Rol</th>
+                    <th>Estatus</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -36,8 +37,19 @@
                             @endforeach
                         </td>
                         <td class="align-middle">
+                            @if($user->status == 'Activo')
+                                <span class="badge badge-success p-2">{{ $user->status }}</span></td>
+                            @elseif($user->status == 'Suspendido')
+                                <span class="badge badge-warning p-2">{{ $user->status }}</span></td>
+                            @else
+                                <span class="badge badge-danger p-2">{{ $user->status }}</span></td>
+                            @endif
+                        <td class="align-middle">
                             <a href="{{ route('user.show', $user->id) }}" role="button" class="btn btn-dark display:inline">Ver</a>
                             <a href="{{ route('user.edit', $user->id) }}" role="button" class="btn btn-info display:inline">Editar</a>
+                            {!! Form::open(['method' => 'PUT', 'route' => ['user.suspend', $user->id], 'style' => 'display:inline' ]) !!}
+                                {!! Form::submit('Baja', ['class' => 'btn btn-warning']) !!}
+                            {!! Form::close() !!}
                             {!! Form::open(['method' => 'DELETE', 'route' => ['user.destroy', $user->id], 'style' => 'display:inline' ]) !!}
                                 {!! Form::submit('Borrar', ['class' => 'btn btn-danger']) !!}
                             {!! Form::close() !!}

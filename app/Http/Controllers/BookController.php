@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class BookController extends Controller
 {
@@ -21,6 +22,10 @@ class BookController extends Controller
     public function index()
     {
         $books = Book::all();
+
+        alert()->success('Title','Lorem Lorem Lorem');
+
+
 
         return view('book.index' , compact('books'));
     }
@@ -132,6 +137,9 @@ class BookController extends Controller
     {
         Storage::delete($book->image);
         $book->delete();
+
+        Alert::success('Success Message', 'EliminadoS');
+
 
         return redirect('book');
     }
