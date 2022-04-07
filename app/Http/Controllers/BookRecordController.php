@@ -21,7 +21,6 @@ class BookRecordController extends Controller
      */
     public function index()
     {
-        $asd = BookRecord::where('status', 'Pendiente')->get();
 
         $book_records = BookRecord::with('user')->with('book')->get();
         return view('book-record.index', compact('book_records'));
