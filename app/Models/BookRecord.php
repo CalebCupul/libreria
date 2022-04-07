@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Observers\BookRecordObserver;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,8 +14,13 @@ class BookRecord extends Model
 
         'user_id', 
         'book_id',
-        'status'
+        'status',
+        'returned_at'
         
+    ];
+
+    protected $casts = [
+        'returned_at' => 'datetime:Y-m-d'
     ];
 
     public function user(){

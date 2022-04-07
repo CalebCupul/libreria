@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Exports\BookRecordsExport;
+use App\Mail\BookRecordMailable;
 use App\Models\Book;
 use App\Models\BookRecord;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
 
 class BookRecordController extends Controller
@@ -18,6 +21,8 @@ class BookRecordController extends Controller
      */
     public function index()
     {
+        $asd = BookRecord::where('status', 'Pendiente')->get();
+
         $book_records = BookRecord::with('user')->with('book')->get();
         return view('book-record.index', compact('book_records'));
     }
@@ -42,10 +47,15 @@ class BookRecordController extends Controller
      */
     public function store(Request $request)
     {
+        // Agrega fecha limite de entrega
+        $returned_at = now()->addDays(8)->format('Y-m-d');
+        $request->request->add(['returned_at' => $returned_at]);
+
         $input = $request->validate([
 
             'user_id' => 'required',
-            'book_id' => 'required'
+            'book_id' => 'required',
+            'returned_at' => 'nullable'
 
         ]);
         
@@ -87,6 +97,8 @@ class BookRecordController extends Controller
     {
         // Al devolver el libro, cambia el estado del prestamo
         $bookRecord->update(['status' => 'Entregado']);
+        $bookRecord->user->update(['status' => 'Activo']);
+
 
         return redirect('book-record');
     }
@@ -106,5 +118,11 @@ class BookRecordController extends Controller
         
         return Excel::download(new BookRecordsExport, 'prestamos.xlsx');
 
+    }
+
+    public static function sendEmailAfterBookDelay(BookRecord $bookRecord){
+        $email = new BookRecordMailable;
+
+        Mail::to($bookRecord->user->email)->send($email);
     }
 }

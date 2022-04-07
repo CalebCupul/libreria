@@ -21,7 +21,7 @@
                         <td class="align-middle">{{ $book_record->book->isbn }}</td>
                         <td class="align-middle">{{ $book_record->book->editorial }}</td>
                         <td class="align-middle">{{ $book_record->created_at->format('Y-m-d') }}</td>
-                        <td class="align-middle">{{ $book_record->created_at->addDays(5)->format('Y-m-d') }}</td>
+                        <td class="align-middle">{{ $book_record->returned_at->format('Y-m-d') }}</td>
                         <td class="align-middle">
                             @if($book_record->status == 'Pendiente')
                                 <span class="badge badge-secondary p-2">{{ $book_record->status }}</span></td>
