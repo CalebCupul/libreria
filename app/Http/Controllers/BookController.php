@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class BookController extends Controller
 {
@@ -138,7 +137,6 @@ class BookController extends Controller
         Storage::delete($book->image);
         $book->delete();
 
-        Alert::success('Success Message', 'EliminadoS');
 
 
         return redirect('book');
@@ -157,6 +155,6 @@ class BookController extends Controller
 
         Excel::import(new BooksImport, request()->file('import_file'));
 
-        return redirect('book')->with('success', 'Productos importados exitosamente');
+        return redirect('book');
     }
 }
