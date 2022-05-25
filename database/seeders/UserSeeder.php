@@ -16,9 +16,9 @@ class UserSeeder extends Seeder
     {
         User::create([
 
-            'name' => 'Caleb',
-            'email' => 'calebcupul@gmail.com',
-            'password' => bcrypt('caleb123'),
+            'name' => 'SuperAdmin',
+            'email' => 'superadmin@gmail.com',
+            'password' => bcrypt('password'),
             'phone_number' => '32215021322',
             'address' => 'Cucosta, Ixtapa',
             'proof_of_address' => 'demoComprobante.jpg',
@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
 
             'name' => 'demoCliente',
             'email' => 'demoCliente@gmail.com',
-            'password' => bcrypt('caleb123'),
+            'password' => bcrypt('password'),
             'phone_number' => '32215021322',
             'address' => 'Cucosta, Ixtapa',
             'proof_of_address' => 'demoComprobante.jpg',
@@ -42,7 +42,7 @@ class UserSeeder extends Seeder
 
             'name' => 'demoEmpleado',
             'email' => 'demoEmpleado@gmail.com',
-            'password' => bcrypt('caleb123'),
+            'password' => bcrypt('password'),
             'phone_number' => '32215021322',
             'address' => 'Cucosta, Ixtapa',
             'proof_of_address' => 'demoComprobante.jpg',
@@ -54,7 +54,7 @@ class UserSeeder extends Seeder
 
             'name' => 'DemoAdmin',
             'email' => 'demoAdmin@gmail.com',
-            'password' => bcrypt('caleb123'),
+            'password' => bcrypt('password'),
             'phone_number' => '32215021322',
             'address' => 'Cucosta, Ixtapa',
             'proof_of_address' => 'demoComprobante.jpg',
